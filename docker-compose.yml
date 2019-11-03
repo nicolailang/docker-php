@@ -4,7 +4,9 @@ services:
   web:
     #image: joomla:3.6.2-apache-php7
     #image: joomla:3.6.2-apache
-    build: ./web
+    build: 
+      context: ./web
+      dockerfile: Dockerfile${PHPVER}
     links:
      - mysql:mysql
     ports:

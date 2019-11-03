@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.3-apache
 LABEL maintainer="Nicolai"
 RUN a2enmod rewrite
 
@@ -59,6 +59,8 @@ RUN set -ex; \
 	rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update ; apt-get install -y iputils-ping dnsutils ; rm -rf /var/lib/apt/lists/*
+
+RUN a2enmod expires
 
 VOLUME /var/www/html
 
