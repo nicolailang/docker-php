@@ -35,7 +35,7 @@ services:
   smtpout:
     image: namshi/smtp
     restart: always
-    environment
+    environment:
       - MAILNAME=${SMTPHOSTNAME}
     networks:
       - internalnet
