@@ -7,14 +7,11 @@ services:
       dockerfile: Dockerfile${PHPVER}
     links:
      - mysql:mysql
-#    ports:
-#     - "${APP_PORT}:80"
     restart: always
     environment:
      - JOOMLA_DB_HOST=mysql:3306
      - JOOMLA_DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
      - VIRTUAL_HOST=${VIRTUAL_HOST}
-#     - VIRTUAL_PORT=${APP_PORT}
      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
     volumes:
@@ -38,6 +35,8 @@ services:
   smtpout:
     image: namshi/smtp
     restart: always
+    environment
+      - MAILNAME=${SMTPHOSTNAME}
     networks:
       - internalnet
 
