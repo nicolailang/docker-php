@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:5.6-apache
 LABEL maintainer="Nicolai"
 RUN a2enmod rewrite
 
@@ -34,8 +34,8 @@ RUN set -ex; \
 	; \
 	\
 # pecl will claim success even if one install fails, so we need to perform each install separately
-	pecl install APCu-5.1.17; \
-	pecl install memcached-3.1.4; \
+	pecl install APCu-4.0.7; \
+	pecl install memcached-2.2.0; \
 	pecl install redis-4.3.0; \
 	\
 	docker-php-ext-enable \
@@ -61,18 +61,6 @@ RUN set -ex; \
 RUN apt-get update ; apt-get install -y iputils-ping dnsutils ; rm -rf /var/lib/apt/lists/*
 
 RUN a2enmod expires
-#RUN a2enmod remoteip
-
-RUN \
-	echo "RemoteIPHeader X-Forwarded-For" > /etc/apache2/conf-enabled/myproxy.conf ;\
-	echo "RemoteIPInternalProxy " >> /etc/apache2/conf-enabled/myproxy.conf ;\
-	echo "" >> /etc/apache2/conf-enabled/myproxy.conf ;\
-	echo "" >> /etc/apache2/conf-enabled/myproxy.conf ;\
-	echo "" >> /etc/apache2/conf-enabled/myproxy.conf ;\
-	echo "" >> /etc/apache2/conf-enabled/myproxy.conf ;\
-	echo "" >> /etc/apache2/conf-enabled/myproxy.conf 
-
-RUN rm /etc/apache2/conf-enabled/myproxy.conf
 
 VOLUME /var/www/html
 

@@ -9,6 +9,7 @@ services:
      - mysql:mysql
 #    ports:
 #     - "${APP_PORT}:80"
+    restart: always
     environment:
      - JOOMLA_DB_HOST=mysql:3306
      - JOOMLA_DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -24,6 +25,7 @@ services:
   
   mysql:
     image: mysql:5.7.28
+    restart: always
     environment:
      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
      #- MYSQL_DATABASE=joomla
@@ -38,6 +40,20 @@ services:
     restart: always
     networks:
       - internalnet
+
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin:4.8
+#    restart: "no"
+#    networks: 
+#      - internalnet
+#      - web
+#    environment:
+#      - PMA_HOST=mysql
+#      - PMA_PORT=3306
+#      - LETSENCRYPT_HOST=madm.ageplay.dk
+#      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+#- VIRTUAL_HOST=madm.ageplay.dk
+#      - VIRTUAL_PORT=80
 
 networks: 
   web:
